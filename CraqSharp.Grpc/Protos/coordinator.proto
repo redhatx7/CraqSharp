@@ -1,0 +1,33 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+import "shared.proto";
+
+option csharp_namespace = "CraqSharp.Grpc.Services";
+
+service CoordinatorService {
+  rpc AddNode(AddNodeRequest) returns (NodeData);
+  rpc RemoveNode(RemoveNodeRequest) returns (google.protobuf.Empty);
+  rpc Write(WriteRequest) returns (WriteResponse); 
+}
+
+
+
+message WriteRequest {
+  string key = 1;
+  bytes value = 2;
+}
+
+message WriteResponse {
+  uint64 version_number = 1;
+}
+
+message AddNodeRequest {
+  string nodeAddress = 1;
+}
+
+message RemoveNodeRequest {
+  int32 node_id = 1;
+}
+
+

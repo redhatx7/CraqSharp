@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+import "shared.proto";
+
+option csharp_namespace = "CraqSharp.Grpc.Services";
+
+service  NodeService {
+  rpc Connect(google.protobuf.Empty) returns (ConnectResponse);
+  rpc Ping(google.protobuf.Empty) returns (PingResponse);
+  rpc Read(ReadRequest) returns (ReadResponse);
+  rpc Commit(CommitRequest) returns (CommitResponse);
+  rpc Update(NodeData) returns (google.protobuf.Empty);
+  
+}
+
+
+message CommitRequest {
+  string key = 1;
+  int64 version = 2;
+}
+
+message CommitResponse {
+  bool successful = 1;
+  string key = 2;
+  int64 version = 3;
+}
+
+
+message ReadRequest {
+  string key = 1;
+}
+
+message ReadResponse {
+  int64 version = 1;
+  string key = 2;
+  bytes value = 3;
+}
+
+message PingResponse {
+  string node_id = 1;
+}
+
+
+message ConnectResponse {
+  bool is_healthy = 1;
+}

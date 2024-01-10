@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+
+message NodeData {
+  bool is_head = 1;
+  bool is_tail = 2;
+  string prev_node = 3;
+  string next_node = 4;
+  string tail = 5;
+  string unique_id = 6;
+}
